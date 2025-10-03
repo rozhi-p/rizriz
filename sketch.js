@@ -3,14 +3,14 @@
 // Corgi fetches the ball wherever you touch
 
 // Global variables
-let corgiGif;
-let corgiX;
-let corgiY;
+let rotGif;
+let rotX;
+let rotY;
 let targetX;
 let targetY;
 let moveSpeed = 0.05; // Speed multiplier for movement (0.0 - 1.0)
-let corgiRotation = 0;
-let corgiScale = 1.2; // Size multiplier for corgi
+let rotRotation = 0;
+let rotScale = 1.2; // Size multiplier for corgi
 let touchCounter = 0;
 let backgroundColor;
 
@@ -31,10 +31,10 @@ function setup()
     textAlign(CENTER, CENTER);
     
     // Start corgi at center
-    corgiX = width / 2;
-    corgiY = height / 2;
-    targetX = corgiX;
-    targetY = corgiY;
+    rotX = width / 2;
+    rotY = height / 2;
+    targetX = rotX;
+    targetY = rotY;
 }
 
 function draw() 
@@ -42,29 +42,29 @@ function draw()
     background(backgroundColor);
     
     // Calculate angle to target
-    let angleToTarget = atan2(targetY - corgiY, targetX - corgiX);
+    let angleToTarget = atan2(targetY - rotY, targetX - rotX);
     
     // Smoothly move corgi toward target position
-    corgiX = lerp(corgiX, targetX, moveSpeed);
-    corgiY = lerp(corgiY, targetY, moveSpeed);
+    rotX = lerp(rotX, targetX, moveSpeed);
+    rotY = lerp(rotY, targetY, moveSpeed);
     
     // Smoothly rotate toward movement direction
-    corgiRotation = angleToTarget;
+    rotRotation = angleToTarget;
     
     // Display GIF with rotation and scale
     push();
-    translate(corgiX, corgiY);
-    rotate(corgiRotation);
+    translate(rotX, rotY);
+    rotate(rotRotation);
     imageMode(CENTER);
-    image(corgiGif, 0, 0, 200 * corgiScale, 200 * corgiScale);
+    image(rotGif, 0, 0, 200 * rotScale, 200 * rotScale);
     pop();
     
     // Draw ball (target point) when different from current position
-    let distance = dist(corgiX, corgiY, targetX, targetY);
+    let distance = dist(rotX, rotY, targetX, targetY);
     if (distance > 5) 
     {
         // Corgi is moving - play the GIF
-        corgiGif.play();
+        rotGif.play();
         
         // Draw ball
         fill(255, 200, 50);
@@ -80,7 +80,7 @@ function draw()
     else
     {
         // Ball caught! Pause the GIF and show celebration
-        corgiGif.pause();
+        rotGif.pause();
         
         fill(100, 255, 100);
         noStroke();
@@ -111,7 +111,7 @@ function touchStarted()
     }
     
     // Start playing the GIF when new target is set
-    corgiGif.play();
+    rotGif.play();
     
     return false;
 }
