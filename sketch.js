@@ -17,7 +17,7 @@ let backgroundColor;
 function preload() 
 {
     // Load the corgi swimming GIF
-    rotGif = loadImage('gifs\rot.gif');
+    rotGif = loadImage('gifs/rot.gif');
 }
 
 function setup() 
